@@ -9,7 +9,7 @@ Return example:
   "code": 200,
   "description": "OK",
   "headers": {},
-	"data": {}
+  "data": {}
 }
 ```
 
@@ -36,52 +36,52 @@ const request = request("simple-request-library");
 
 class ProviderExample {
 
-	static instance;
+  static instance;
 
-	static getInstance() {
-		if (!UserController.instance) {
-			UserController.instance = new UserController();
-		}
-		return UserController.instance;
-	}
+  static getInstance() {
+    if (!UserController.instance) {
+        UserController.instance = new UserController();
+    }
+    return UserController.instance;
+    }
 
 
-	async index() {
-		return request().get("http://url.exemple.com");
-	}
+  async index() {
+    return request().get("http://url.exemple.com");
+  }
 
-	async create(body) {
-		return request().post("http://url.exemple.com").send({
-			...body
-		});
-	}
+  async create(body) {
+    return request().post("http://url.exemple.com").send({
+	    ...body
+    });
+  }
 
-    async search(searchObject) {
-		return request().post("http://url.exemple.com", {
-		statusCode: 200,
-		// ...another configs
-		}).send({
-			...searchObject
-		});
-	}
+  async search(searchObject) {
+    return request().post("http://url.exemple.com", {
+      statusCode: 200,
+      // ...another configs
+    }).send({
+      ...searchObject
+    });
+  }
 
-	async update(body) {
-		return request().put("http://url.exemple.com").send({
-			...body
-		});
-	}
+  async update(body) {
+    return request().put("http://url.exemple.com").send({
+      ...body
+    });
+  }
 
-	async updatePartial(body) {
-		return request().patch("http://url.exemple.com").send({
-			...body
-		});
-	}
+  async updatePartial(body) {
+    return request().patch("http://url.exemple.com").send({
+      ...body
+    });   
+  }
 
-	async remove(id) {
-		return request().delete(`http://url.exemple.com/${id}`);
-	}
-
+  async remove(id) {
+    return request().delete(`http://url.exemple.com/${id}`);
+  }
 }
+
 ```
 
 - ES modules
@@ -92,23 +92,23 @@ import request from "simple-request-library";
 export const index = async () => request().get("http://url.exemple.com");
 
 export const create = async (body) => request().post("http://url.exemple.com").send({
-			...body
-		});
+  ...body
+});
 
 export const search = async (searchObject) => request().post("http://url.exemple.com", {
-		statusCode: 200,
-		// ...another configs
-		}).send({
-			...searchObject
-		});
+    statusCode: 200,
+    // ...another configs
+  }).send({
+    ...searchObject
+  });
 
 export const update = async (body) => request().put("http://url.exemple.com").send({
-			...body
-		});
+  ...body
+});
 
 export const updatePartial = async (body) => request().patch("http://url.exemple.com").send({
-			...body
-		});
+  ...body
+});
 
 export const remove = async (id) => request().delete(`http://url.exemple.com/${id}`);
 
@@ -120,10 +120,10 @@ import request from "simple-request-library";
 import axios from "axios";
 
 const instance = axios.create({ 
-		baseURL:  'https://some-domain.com/api/',
-		timeout:  1000,
-		headers:  {'X-Custom-Header':  'foobar'} 
-	});
+  baseURL:  'https://some-domain.com/api/',
+  timeout:  1000,
+  headers:  {'X-Custom-Header':  'foobar'} 
+});
 
 export const { get, post, put, patch, delete } = request(instance)
 
