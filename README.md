@@ -82,6 +82,8 @@ class ProviderExample {
   }
 }
 
+module.exports = ProviderExample.getInstance();
+
 ```
 
 - ES modules
