@@ -43,7 +43,7 @@ class ProviderExample {
         UserController.instance = new UserController();
     }
     return UserController.instance;
-    }
+  }
 
 
   async index() {
@@ -81,6 +81,8 @@ class ProviderExample {
     return request().delete(`http://url.exemple.com/${id}`);
   }
 }
+
+module.exports = ProviderExample.getInstance();
 
 ```
 
