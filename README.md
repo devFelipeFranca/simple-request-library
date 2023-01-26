@@ -52,7 +52,7 @@ class ProviderExample {
 
   async create(body) {
     return request().post("http://url.exemple.com").send({
-	    ...body
+      ...body
     });
   }
 
