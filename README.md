@@ -5,10 +5,10 @@ A simple way to making HTTP requests based on axios no try catch.
 Return example:
 ```json
 {
-	"success": true,
-	"code": 200,
-	"description": "OK",
-	"headers": {},
+  "success": true,
+  "code": 200,
+  "description": "OK",
+  "headers": {},
 	"data": {}
 }
 ```
