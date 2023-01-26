@@ -32,7 +32,7 @@ Examples:
 - Commonjs
 > provider.js
 ```javascript
-const request = request("simple-request-library");
+const request = require("simple-request-library");
 
 class ProviderExample {
 
