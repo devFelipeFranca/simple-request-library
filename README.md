@@ -32,7 +32,7 @@ Examples:
 - Commonjs
 > provider.js
 ```javascript
-const request = require("simple-request-library");
+const { request } = require("simple-request-library");
 
 class ProviderExample {
 
@@ -89,7 +89,7 @@ module.exports = ProviderExample.getInstance();
 - ES modules
 > provider.js
 ```typescript
-import request from "simple-request-library";
+import { request } from "simple-request-library";
 
 export const index = async () => request().get("http://url.exemple.com");
 
@@ -118,10 +118,9 @@ export const remove = async (id) => request().delete(`http://url.exemple.com/${i
 - AxiosInstance example:
 > api.ts
 ```typescript
-import request from "simple-request-library";
-import axios from "axios";
+import { request, createAxiosInstance } from "simple-request-library";
 
-const instance = axios.create({ 
+const instance = createAxiosInstance({ 
   baseURL:  'https://some-domain.com/api/',
   timeout:  1000,
   headers:  {'X-Custom-Header':  'foobar'} 
