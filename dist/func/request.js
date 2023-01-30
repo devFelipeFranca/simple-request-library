@@ -50,6 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("../bin/retry-bin");
 var serialize_response_1 = require("../utils/serialize-response");
 var axios_1 = __importDefault(require("axios"));
 var request = function (instance) {
@@ -59,11 +60,15 @@ var request = function (instance) {
             return __generator(this, function (_a) {
                 return [2 /*return*/, instance
                         .get(url)
-                        .then(function (res) { var _a; return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign({}, res.data)); })
+                        .then(function (res) {
+                        var _a;
+                        return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign(__assign({}, res.data), { beforeInstace: instance }));
+                    })
                         .catch(function (err) {
                         var _a, _b, _c, _d, _e, _f, _g;
-                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data));
-                    })];
+                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign(__assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data), { debugger: err, beforeInstace: instance }));
+                    })
+                        .clean()];
             });
         }); },
         post: function (url, options) {
@@ -73,12 +78,13 @@ var request = function (instance) {
                         .post(url, data)
                         .then(function (res) {
                         var _a;
-                        return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({}, res.data));
+                        return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({}, res.data), { beforeInstace: instance }));
                     })
                         .catch(function (err) {
                         var _a, _b, _c, _d, _e, _f, _g;
-                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data));
-                    });
+                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data), { debugger: err, beforeInstace: instance, bodyBackup: data }));
+                    })
+                        .clean();
                 },
             };
         },
@@ -90,12 +96,13 @@ var request = function (instance) {
                                 .put(url, data)
                                 .then(function (res) {
                                 var _a;
-                                return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({}, res.data));
+                                return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({}, res.data), { beforeInstace: instance }));
                             })
                                 .catch(function (err) {
                                 var _a, _b, _c, _d, _e, _f, _g;
-                                return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data));
-                            })];
+                                return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data), { debugger: err, beforeInstace: instance, bodyBackup: data }));
+                            })
+                                .clean()];
                     });
                 }); },
             };
@@ -108,12 +115,13 @@ var request = function (instance) {
                                 .patch(url, data)
                                 .then(function (res) {
                                 var _a;
-                                return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({}, res.data));
+                                return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({}, res.data), { beforeInstace: instance }));
                             })
                                 .catch(function (err) {
                                 var _a, _b, _c, _d, _e, _f, _g;
-                                return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data));
-                            })];
+                                return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data), { debugger: err, beforeInstace: instance, bodyBackup: data }));
+                            })
+                                .clean()];
                     });
                 }); },
             };
@@ -122,11 +130,15 @@ var request = function (instance) {
             return __generator(this, function (_a) {
                 return [2 /*return*/, instance
                         .delete(url)
-                        .then(function (res) { var _a; return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign({}, res.data)); })
+                        .then(function (res) {
+                        var _a;
+                        return (0, serialize_response_1.serializeResponse)(res, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 200, __assign(__assign({}, res.data), { beforeInstace: instance }));
+                    })
                         .catch(function (err) {
                         var _a, _b, _c, _d, _e, _f, _g;
-                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data));
-                    })];
+                        return (0, serialize_response_1.serializeResponse)(err === null || err === void 0 ? void 0 : err.response, (_a = options === null || options === void 0 ? void 0 : options.statusCode) !== null && _a !== void 0 ? _a : 201, __assign(__assign({ code: ((_b = err === null || err === void 0 ? void 0 : err.response) === null || _b === void 0 ? void 0 : _b.status) || 500, message: ((_d = (_c = err === null || err === void 0 ? void 0 : err.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.message) || (err === null || err === void 0 ? void 0 : err.message), name: ((_f = (_e = err === null || err === void 0 ? void 0 : err.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.name) || (err === null || err === void 0 ? void 0 : err.name) }, (_g = err === null || err === void 0 ? void 0 : err.response) === null || _g === void 0 ? void 0 : _g.data), { debugger: err, beforeInstace: instance }));
+                    })
+                        .clean()];
             });
         }); },
     };

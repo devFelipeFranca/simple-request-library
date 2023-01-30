@@ -1,7 +1,7 @@
 {
   "name": "simple-request-library",
-  "version": "1.1.11",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A simple way to making HTTP requests based on axios no try catch.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,7 +13,14 @@
     "url": "https://github.com/devFelipeFranca/simple-request-library"
   },
   "homepage": "",
-  "keywords": [],
+  "keywords": [
+    "axios",
+    "request",
+    "simple",
+    "http",
+    "async",
+    "method"
+  ],
   "author": "devfelipeFranca",
   "license": "ISC",
   "devDependencies": {

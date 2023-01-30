@@ -46,23 +46,70 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = require("./index");
-(function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, (0, index_1.request)()
-                    .get('https://my-expenses-sand.vercel.app/api/expenses/1')
-                    .retry()
-                    .whenTimeoutError()
-                    .debugger()
-                    .whenAnyError(function (response) {
-                    console.log(__assign({}, response.data));
-                })
-                    .debugger()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); })();
+var abstractRetry_1 = __importDefault(require("../utils/abstractRetry"));
+if (!Promise.prototype.debugger) {
+    Promise.prototype.debugger = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var randomId, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        randomId = Math.random().toString();
+                        console.time("debugger id: ".concat(randomId));
+                        _b = (_a = console).debug;
+                        return [4 /*yield*/, this];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        console.timeEnd("debugger id: ".concat(randomId));
+                        return [2 /*return*/, this];
+                }
+            });
+        });
+    };
+}
+if (!Promise.prototype.clean) {
+    Promise.prototype.clean =
+        function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var resolvedPromise;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this];
+                        case 1:
+                            resolvedPromise = _a.sent();
+                            delete resolvedPromise.data.debugger;
+                            delete resolvedPromise.data.beforeInstace;
+                            delete resolvedPromise.data.bodyBackup;
+                            return [2 /*return*/, resolvedPromise];
+                    }
+                });
+            });
+        };
+}
+if (!Promise.prototype.retry) {
+    Promise.prototype.retry = function (ms /* 1 second */) {
+        if (ms === void 0) { ms = 1000; }
+        return __assign({}, (0, abstractRetry_1.default)(this, ms));
+    };
+}
+if (!Promise.prototype.whenAnyError) {
+    Promise.prototype.whenAnyError = function (callback) {
+        return __awaiter(this, void 0, void 0, function () {
+            var resolvedPromise;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.clean()];
+                    case 1:
+                        resolvedPromise = _a.sent();
+                        return [2 /*return*/, !resolvedPromise.success
+                                ? resolvedPromise
+                                : callback(resolvedPromise)];
+                }
+            });
+        });
+    };
+}

@@ -1,3 +1,4 @@
+import '../bin/retry-bin';
 import { serializeResponse } from '../utils/serialize-response';
 import axios from 'axios';
 import { Request } from '../@types';
@@ -8,16 +9,22 @@ const request: Request = (instance = axios) => {
       return instance
         .get(url)
         .then((res) =>
-          serializeResponse(res, options?.statusCode ?? 200, { ...res.data })
+          serializeResponse(res, options?.statusCode ?? 200, {
+            ...res.data,
+            beforeInstace: instance,
+          })
         )
-        .catch((err) =>
+        .catch((err: any) =>
           serializeResponse(err?.response, options?.statusCode ?? 200, {
             code: err?.response?.status || 500,
             message: err?.response?.data?.message || err?.message,
             name: err?.response?.data?.name || err?.name,
             ...err?.response?.data,
+            debugger: err,
+            beforeInstace: instance,
           })
-        );
+        )
+        .clean();
     },
     post: (url, options) => {
       return {
@@ -27,16 +34,21 @@ const request: Request = (instance = axios) => {
             .then((res) =>
               serializeResponse(res, options?.statusCode ?? 201, {
                 ...res.data,
+                beforeInstace: instance,
               })
             )
-            .catch((err) =>
+            .catch((err: any) =>
               serializeResponse(err?.response, options?.statusCode ?? 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
                 ...err?.response?.data,
+                debugger: err,
+                beforeInstace: instance,
+                bodyBackup: data,
               })
-            );
+            )
+            .clean();
         },
       };
     },
@@ -48,16 +60,21 @@ const request: Request = (instance = axios) => {
             .then((res) =>
               serializeResponse(res, options?.statusCode ?? 201, {
                 ...res.data,
+                beforeInstace: instance,
               })
             )
-            .catch((err) =>
+            .catch((err: any) =>
               serializeResponse(err?.response, options?.statusCode ?? 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
                 ...err?.response?.data,
+                debugger: err,
+                beforeInstace: instance,
+                bodyBackup: data,
               })
-            );
+            )
+            .clean();
         },
       };
     },
@@ -69,16 +86,21 @@ const request: Request = (instance = axios) => {
             .then((res) =>
               serializeResponse(res, options?.statusCode ?? 201, {
                 ...res.data,
+                beforeInstace: instance,
               })
             )
-            .catch((err) =>
+            .catch((err: any) =>
               serializeResponse(err?.response, options?.statusCode ?? 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
                 ...err?.response?.data,
+                debugger: err,
+                beforeInstace: instance,
+                bodyBackup: data,
               })
-            );
+            )
+            .clean();
         },
       };
     },
@@ -86,16 +108,22 @@ const request: Request = (instance = axios) => {
       return instance
         .delete(url)
         .then((res) =>
-          serializeResponse(res, options?.statusCode ?? 200, { ...res.data })
+          serializeResponse(res, options?.statusCode ?? 200, {
+            ...res.data,
+            beforeInstace: instance,
+          })
         )
-        .catch((err) =>
+        .catch((err: any) =>
           serializeResponse(err?.response, options?.statusCode ?? 201, {
             code: err?.response?.status || 500,
             message: err?.response?.data?.message || err?.message,
             name: err?.response?.data?.name || err?.name,
             ...err?.response?.data,
+            debugger: err,
+            beforeInstace: instance,
           })
-        );
+        )
+        .clean();
     },
   };
 };
