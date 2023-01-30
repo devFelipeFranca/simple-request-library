@@ -15,6 +15,7 @@ export type RequestMethods = {
         send: (data: any) => Promise<SerializeResponseObject>;
     };
     delete: (url: string, options?: Options) => Promise<SerializeResponseObject>;
+    options: (url: string, options?: Options) => Promise<SerializeResponseObject>;
 };
 export type Request = {
     (instance?: AxiosInstance): RequestMethods;

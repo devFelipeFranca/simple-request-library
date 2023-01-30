@@ -98,6 +98,7 @@ export const create = async (body) => request().post("http://url.exemple.com").s
 
 export const search = async (searchObject) => request().post("http://url.exemple.com", {
     statusCode: 200,
+    headers: {"Content-Type": "application/json"}
     // ...another configs
   }).send({
     ...searchObject

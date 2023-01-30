@@ -1,6 +1,6 @@
 {
   "name": "simple-request-library",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A simple way to making HTTP requests based on axios no try catch.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

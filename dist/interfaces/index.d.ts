@@ -7,5 +7,8 @@ export interface SerializeResponseObject {
 }
 export interface Options {
     successCode: number;
+    headers: {
+        [key: string]: any;
+    };
     [x: PropertyKey]: any;
 }
