@@ -52,7 +52,7 @@ if (!Promise.prototype.retry) {
 if (!Promise.prototype.whenAnyError) {
   Promise.prototype.whenAnyError = async function (callback) {
     const resolvedPromise = await this.clean();
-    return !resolvedPromise.success
+    return resolvedPromise.success
       ? resolvedPromise
       : callback(resolvedPromise);
   };

@@ -59,6 +59,7 @@ class ProviderExample {
   async search(searchObject) {
     return request().post("http://url.exemple.com", {
       statusCode: 200,
+      headers: {"Content-Type": "application/json"}
       // ...another configs
     }).send({
       ...searchObject
