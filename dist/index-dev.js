@@ -53,7 +53,7 @@ var index_1 = require("./index");
         switch (_a.label) {
             case 0: return [4 /*yield*/, (0, index_1.request)()
                     .get('https://my-expenses-sand.vercel.app/api/expenses', {
-                    successCode: 200,
+                    statusCode: 200,
                     headers: { 'content-type': 'application/json' },
                 })
                     .retry()

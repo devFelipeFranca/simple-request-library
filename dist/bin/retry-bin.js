@@ -105,7 +105,7 @@ if (!Promise.prototype.whenAnyError) {
                     case 0: return [4 /*yield*/, this.clean()];
                     case 1:
                         resolvedPromise = _a.sent();
-                        return [2 /*return*/, !resolvedPromise.success
+                        return [2 /*return*/, resolvedPromise.success
                                 ? resolvedPromise
                                 : callback(resolvedPromise)];
                 }

@@ -11,13 +11,13 @@ const request: Request = (instance = axios) => {
       return instance
         .get(url)
         .then((res) =>
-          serializeResponse(res, options?.statusCode ?? 200, {
+          serializeResponse(res, options?.statusCode || 200, {
             ...res.data,
             beforeInstace: instance,
           })
         )
         .catch((err: any) =>
-          serializeResponse(err?.response, options?.statusCode ?? 200, {
+          serializeResponse(err?.response, options?.statusCode || 200, {
             code: err?.response?.status || 500,
             message: err?.response?.data?.message || err?.message,
             name: err?.response?.data?.name || err?.name,
@@ -35,13 +35,13 @@ const request: Request = (instance = axios) => {
           return instance
             .post(url, data)
             .then((res) =>
-              serializeResponse(res, options?.statusCode ?? 201, {
+              serializeResponse(res, options?.statusCode || 201, {
                 ...res.data,
                 beforeInstace: instance,
               })
             )
             .catch((err: any) =>
-              serializeResponse(err?.response, options?.statusCode ?? 201, {
+              serializeResponse(err?.response, options?.statusCode || 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
@@ -62,13 +62,13 @@ const request: Request = (instance = axios) => {
           return instance
             .put(url, data)
             .then((res) =>
-              serializeResponse(res, options?.statusCode ?? 201, {
+              serializeResponse(res, options?.statusCode || 201, {
                 ...res.data,
                 beforeInstace: instance,
               })
             )
             .catch((err: any) =>
-              serializeResponse(err?.response, options?.statusCode ?? 201, {
+              serializeResponse(err?.response, options?.statusCode || 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
@@ -89,13 +89,13 @@ const request: Request = (instance = axios) => {
           return instance
             .patch(url, data)
             .then((res) =>
-              serializeResponse(res, options?.statusCode ?? 201, {
+              serializeResponse(res, options?.statusCode || 201, {
                 ...res.data,
                 beforeInstace: instance,
               })
             )
             .catch((err: any) =>
-              serializeResponse(err?.response, options?.statusCode ?? 201, {
+              serializeResponse(err?.response, options?.statusCode || 201, {
                 code: err?.response?.status || 500,
                 message: err?.response?.data?.message || err?.message,
                 name: err?.response?.data?.name || err?.name,
@@ -114,13 +114,13 @@ const request: Request = (instance = axios) => {
       return instance
         .delete(url)
         .then((res) =>
-          serializeResponse(res, options?.statusCode ?? 200, {
+          serializeResponse(res, options?.statusCode || 200, {
             ...res.data,
             beforeInstace: instance,
           })
         )
         .catch((err: any) =>
-          serializeResponse(err?.response, options?.statusCode ?? 201, {
+          serializeResponse(err?.response, options?.statusCode || 201, {
             code: err?.response?.status || 500,
             message: err?.response?.data?.message || err?.message,
             name: err?.response?.data?.name || err?.name,
@@ -136,13 +136,13 @@ const request: Request = (instance = axios) => {
       return instance
         .options(url)
         .then((res) =>
-          serializeResponse(res, options?.statusCode ?? 200, {
+          serializeResponse(res, options?.statusCode || 200, {
             ...res.data,
             beforeInstace: instance,
           })
         )
         .catch((err: any) =>
-          serializeResponse(err?.response, options?.statusCode ?? 200, {
+          serializeResponse(err?.response, options?.statusCode || 200, {
             code: err?.response?.status || 500,
             message: err?.response?.data?.message || err?.message,
             name: err?.response?.data?.name || err?.name,
