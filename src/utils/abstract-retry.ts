@@ -1,5 +1,5 @@
-import { SerializeResponseObject } from './../interfaces/index';
-import runTrack from './runTrack';
+import { SerializeResponseObject } from '../interfaces/index';
+import runTrack from './run-track';
 import mapperHttpErros from '../errors/mapper-http-erros';
 import sleep from './sleep';
 

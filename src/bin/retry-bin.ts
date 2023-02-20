@@ -1,5 +1,5 @@
 import { SerializeResponseObject } from '../interfaces';
-import abstractRetry from '../utils/abstractRetry';
+import abstractRetry from '../utils/abstract-retry';
 
 export {};
 
