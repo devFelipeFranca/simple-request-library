@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -50,66 +39,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var abstract_retry_1 = __importDefault(require("../utils/abstract-retry"));
-if (!Promise.prototype.debugger) {
-    Promise.prototype.debugger = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var randomId, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        randomId = Math.random().toString();
-                        console.time("debugger id: ".concat(randomId));
-                        _b = (_a = console).debug;
-                        return [4 /*yield*/, this];
-                    case 1:
-                        _b.apply(_a, [_c.sent()]);
-                        console.timeEnd("debugger id: ".concat(randomId));
-                        return [2 /*return*/, this];
-                }
-            });
-        });
-    };
-}
-if (!Promise.prototype.clean) {
-    Promise.prototype.clean =
-        function () {
-            return __awaiter(this, void 0, void 0, function () {
-                var resolvedPromise;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this];
-                        case 1:
-                            resolvedPromise = _a.sent();
-                            delete resolvedPromise.data.debugger;
-                            delete resolvedPromise.data.beforeInstace;
-                            delete resolvedPromise.data.bodyBackup;
-                            return [2 /*return*/, resolvedPromise];
-                    }
-                });
-            });
-        };
-}
-if (!Promise.prototype.retry) {
-    Promise.prototype.retry = function (ms /* 1 second */) {
-        if (ms === void 0) { ms = 1000; }
-        return __assign({}, (0, abstract_retry_1.default)(this, ms));
-    };
-}
-if (!Promise.prototype.whenAnyError) {
-    Promise.prototype.whenAnyError = function (callback) {
-        return __awaiter(this, void 0, void 0, function () {
-            var resolvedPromise;
+var run_track_1 = __importDefault(require("./run-track"));
+var mapper_http_erros_1 = __importDefault(require("../errors/mapper-http-erros"));
+var sleep_1 = __importDefault(require("./sleep"));
+function abstractRetry(res, ms) {
+    var _this = this;
+    return {
+        whenTimeoutError: function (_ms) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.clean()];
+                    case 0: return [4 /*yield*/, (0, sleep_1.default)(_ms !== null && _ms !== void 0 ? _ms : ms)];
                     case 1:
-                        resolvedPromise = _a.sent();
-                        return [2 /*return*/, resolvedPromise.success
-                                ? resolvedPromise
-                                : callback(resolvedPromise)];
+                        _a.sent();
+                        return [4 /*yield*/, (0, run_track_1.default)(res, mapper_http_erros_1.default.TIMEOUT)];
+                    case 2: return [2 /*return*/, _a.sent()];
                 }
             });
-        });
+        }); },
+        whenInternalServerError: function (_ms) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, (0, sleep_1.default)(_ms !== null && _ms !== void 0 ? _ms : ms)];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, (0, run_track_1.default)(res, mapper_http_erros_1.default.INTERNAL_SERVER_ERROR)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); },
+        whenServiceUnavailableError: function (_ms) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, (0, sleep_1.default)(_ms !== null && _ms !== void 0 ? _ms : ms)];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, (0, run_track_1.default)(res, mapper_http_erros_1.default.SERVICE_UNAVAILABLE)];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); },
     };
 }
+exports.default = abstractRetry;
